@@ -1,4 +1,4 @@
-# markup.start
+# StreamVibe
 
 ## vscode linting and formatting configuration:  
 Install "Stylelint" extension.  
