@@ -1,0 +1,102 @@
+@use "sass:color";
+@use "sass:list";
+@use "sass:math";
+@use "sass:meta";
+
+// Create a list of numbers
+@function range($from, $to, $step: 1) {
+  // validation
+  @if meta.type-of($from) != "number" {
+    @error "$from must be a number.";
+  }
+
+  @if meta.type-of($to) != "number" {
+    @error "$to must be a number.";
+  }
+
+  @if meta.type-of($step) != "number" {
+    @error "$step must be a number.";
+  }
+
+  @if $from > $to {
+    @error "$from must be smaller than $to.";
+  }
+
+  $list: [];
+
+  @while $from <= $to {
+    $list: list.append($list, $from);
+    $from: $from + $step;
+  }
+
+  @return $list;
+}
+
+// A little juggling is necessary because lists in SASS start from 1
+//   instead of 0
+// This makes it tricky to convert the a 0~1 $position into the indices
+//   of the adjencent colors on the gradient
+@function get-color-by-position($colors, $position) {
+  // a zero-based index for the last item in the color list
+  $last-idx: list.length($colors) - 1;
+
+  // calculate the real index on the list based on the position
+  $stop: ($position * $last-idx) + 1;
+
+  // based on the stop, get the indices for the pevious and next colors in the list
+  $prev-idx: math.floor($stop);
+  $next-idx: math.ceil($stop);
+
+  // get the previous and next colors from the list
+  $prev-color: list.nth($colors, $prev-idx);
+  $next-color: list.nth($colors, $next-idx);
+
+  // calculate the amount of each color to mix
+  $amount: $stop - $prev-idx;
+
+  @return color.mix($next-color, $prev-color, math.percentage($amount));
+}
+
+@mixin generator($colors, $from: 100, $to: 900, $step: 100) {
+  // creates a list of weights, from 100 to 900 (default)
+  $weights: range($from, $to, $step);
+
+  // get the index of the last weight
+  $last-idx: list.length($weights) - 1;
+
+  // loops through the weights
+  @for $idx from 0 through $last-idx {
+    // get the weight by index
+    $weight: list.nth($weights, $idx + 1);
+
+    // get the position of the weight on the gradient
+    $pos: math.div($idx, $last-idx);
+
+    // pick the color
+    $color: #{get-color-by-position($colors, $pos)};
+
+    @content ($weight, $color);
+  }
+}
+
+@mixin as-props($name, $colors, $from: 100, $to: 900, $step: 100) {
+  @include generator($colors, $from, $to, $step) using ($weight, $color) {
+    --#{$name}-#{$weight}: #{$color};
+  }
+}
+
+@mixin as-utility-classes($name, $colors, $from: 100, $to: 900, $step: 100) {
+  @include generator($colors, $from, $to, $step) using ($weight, $color) {
+    .text-#{$name}-#{$weight} {
+      color: $color !important;
+    }
+
+    .bg-#{$name}-#{$weight} {
+      background-color: $color !important;
+    }
+
+    .border-#{$name}-#{$weight} {
+      border-color: $color !important;
+    }
+  }
+}

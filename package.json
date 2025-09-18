@@ -1,0 +1,41 @@
+{
+	"name": "streamvibe",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "minista",
+		"build": "minista build",
+		"preview": "minista preview",
+		"format": "npx @biomejs/biome format",
+		"format:fix": "npx @biomejs/biome format --write",
+		"lint": "npx @biomejs/biome lint",
+		"lint:fix": "npx @biomejs/biome lint --write",
+		"check": "npx @biomejs/biome check --write",
+		"stylelint": "stylelint 'src/**/*{.css,.scss}'",
+		"stylelint:fix": "stylelint 'src/**/*{.css,.scss}' --fix"
+	},
+	"prettier": {
+		"semi": false
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.2.3",
+		"minista": "^3.1.12",
+		"postcss-pxtorem": "^6.1.0",
+		"prettier": "^3.6.2",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"sass": "^1.92.1",
+		"stylelint": "^16.24.0",
+		"stylelint-config-standard": "^39.0.0",
+		"stylelint-config-standard-scss": "^16.0.0",
+		"stylelint-order": "^7.0.0",
+		"stylelint-prettier": "^5.0.3",
+		"stylelint-scss": "^6.12.1"
+	},
+	"dependencies": {
+		"@a1rth/css-normalize": "^1.2.2",
+		"classnames": "^2.5.1",
+		"imask": "^7.6.1",
+		"swiper": "^11.2.10"
+	}
+}
