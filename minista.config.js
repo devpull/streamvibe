@@ -79,6 +79,9 @@ export default defineConfig({
 		},
 		preprocessorOptions: {
 			scss: {
+        additionalData: `
+          @use '~/styles/abstracts' as *;
+        `,
 				silenceDeprecations: ['legacy-js-api'],
 			},
 			less: {},
