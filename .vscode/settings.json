@@ -5,6 +5,5 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll.stylelint": "explicit"
 	},
-	"cSpell.words": ["xxxs"],
 	"workspaceKeybindings.allowStylelintKeybinding.enabled": true
 }
