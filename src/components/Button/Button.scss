@@ -1,0 +1,52 @@
+/**
+@define button
+*/
+.button {
+  @include flex-center(true);
+
+  column-gap: 4px;
+  padding: fluid-to-laptop(18, 14) fluid-to-laptop(24, 20);
+  font-weight: 600;
+  color: var(--clr-white);
+  background-color: var(--clr-red-45);
+  border: none;
+  border-radius: var(--border-radius-s);
+  user-select: none;
+  cursor: pointer;
+
+  @include laptop {
+    border-radius: var(--border-radius-xs);
+  }
+
+  @include hover {
+    color: var(--clr-white);
+    background-color: var(--clr-red-60);
+  }
+
+  &:active {
+    scale: 1.05;
+  }
+
+  &:disabled {
+    color: var(--clr-gray-60);
+    background-color: var(--clr-black-06);
+    pointer-events: none;
+  }
+
+  .button:has(.button__icon) {
+    padding: 0;
+  }
+
+  &--transparent {
+    background-color: transparent;
+
+    &:has(.button__icon) {
+      @include square(44px);
+
+      .button__icon {
+        /* stylelint-disable-next-line plugin/selector-bem-pattern */
+        --icon-size: #{fluid-to-laptop(34, 24)};
+      }
+    }
+  }
+}
