@@ -6,7 +6,8 @@
   padding-block: fluid(22, 14);
   border-bottom: var(--border-width-s) solid transparent;
 
-  // animations
+  // animations using ScrollTimeLine Api
+  // @link https://scroll-driven-animations.style/
   animation-name: scrolling-header;
   animation-fill-mode: both;
   animation-timeline: scroll();
@@ -25,5 +26,47 @@
     justify-content: space-between;
     align-items: center;
     column-gap: 16px;
+  }
+
+  &__menu {
+    padding: fluid-to-laptop(10, 8);
+    background-color: var(--clr-black-06);
+    outline: var(--border-width-l) solid var(--clr-black-12);
+    border-radius: var(--border-radius-l);
+
+    @include laptop {
+      border-radius: var(--border-radius-m);
+    }
+
+    &-list {
+      display: flex;
+      align-items: center;
+      column-gap: 6px;
+    }
+
+    &-link {
+      padding-inline: fluid-to-laptop(24, 20);
+      padding-block: fluid-to-laptop(14, 12);
+      color: var(--clr-gray-75);
+      border-radius: var(--border-radius-s);
+
+      @include hover {
+        color: var(--clr-white);
+        background-color: var(--clr-red-60);
+      }
+
+      &.is-active {
+        background-color: var(--clr-black-10);
+        font-weight: 500;
+        color: var(--clr-white);
+        pointer-events: none;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
   }
 }
