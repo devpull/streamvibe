@@ -1,7 +1,8 @@
+import Button from '~/components/Button';
+import BurgerButton from '~/components/BurgerButton';
+import classNames from 'classnames';
 import Logo from '~/components/Logo';
 import './Header.scss';
-import classNames from 'classnames';
-import Button from '~/components/Button';
 
 const menuItems = [
 	{
@@ -61,6 +62,7 @@ const Header = (props) => {
 						iconName="notification"
 					/>
 				</div>
+				<BurgerButton className="header__burger-button" />
 			</div>
 		</header>
 	);
