@@ -33,8 +33,10 @@
     pointer-events: none;
   }
 
-  .button:has(.button__icon) {
+  &:has(.button__icon) {
     padding: 0;
+
+    @include square(fluid-to-laptop(56, 44));
   }
 
   &--transparent {
