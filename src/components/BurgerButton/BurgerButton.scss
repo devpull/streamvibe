@@ -1,0 +1,49 @@
+/**
+@define burger-button
+*/
+.burger-button {
+  @include flex-center(true);
+  @include square(51px);
+
+  padding: 0;
+  background-color: var(--clr-black-10);
+  border: var(--border-width-m) solid var(--clr-black-15);
+  border-radius: var(--border-radius-xs);
+
+  @include hover {
+    background-color: var(--clr-red-60);
+    border-color: transparent;
+  }
+}
+
+.burger-button__line {
+  fill: none;
+  stroke: var(--clr-white);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 60 207;
+  transition:
+    stroke-dasharray var(--transition-duration-long)
+      cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset var(--transition-duration-long)
+      cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.burger-button__line--2 {
+  stroke-dasharray: 60 60;
+}
+
+.burger-button--is-active .burger-button__line {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+}
+
+.burger-button--is-active .burger-button__line--2 {
+  stroke-dasharray: 1 60;
+  stroke-dashoffset: -30;
+}
+
+.burger-button:not(.burger-button--is-active) .burger-button__line--3 {
+  stroke-dasharray: 30 207;
+  stroke-dashoffset: -30;
+}
