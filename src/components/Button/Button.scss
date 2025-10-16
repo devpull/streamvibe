@@ -33,7 +33,7 @@
     pointer-events: none;
   }
 
-  &:has(.button__icon) {
+  &:has(.button__icon:only-child) {
     padding: 0;
 
     @include square(fluid-to-laptop(56, 44));
@@ -50,5 +50,10 @@
         --icon-size: #{fluid-to-laptop(34, 24)};
       }
     }
+  }
+
+  &--black-10 {
+    background-color: var(--clr-black-10);
+    border: var(--border);
   }
 }
